@@ -1,28 +1,36 @@
-<!-- servey.ejs -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>.......Title........</h1>
-    </header>
+<!-- app.js -->
+const mongoose = require("mongoose")
+const app = express()
 
-    <!-- survey content here -->
+mongoose.connect("") // link to mongoose cluster
+const userSchema = new mongoose.Schema({
+    survey_name: String,
+    survey_description: String,
+    questions: [
+        {
+            question_id: Number,
+            question: String,
+            question_type: {type: String, enum: ['multiple_choice', 'text']}, // enum --> only allow these two values aka mc/text q
+            choice: [String] // applied on for mc q's
+        }
+    ],
+    // response from user for an answer --> string their response
+    responses: [
+        {
+            user_id: String,
+            answers: [
+                {
+                    question_id: Number,
+                    answer: String
+                }
+            ]
+        }
+    ]
+});
 
-    <footer>
-        <p>.............. All rights reserved ....... </p>
-    </footer>
-
-</body>
-</html>
 
 
-
-<!-- survey content in the 'app.js file'
+<!-- survey content in the 'survey.ejs file'
 
 <!-- survey content here -->
      <form action="/create-survey" method="POST">
