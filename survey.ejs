@@ -1,0 +1,55 @@
+<!-- when link from landing is clicked ends up on this page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Create your very own servey!</h1>
+    </header>
+
+    <!-- survey content here -->
+     <form action="/create-survey" method="POST">
+        <label for="survey_name">Input your desired Survey Name: </label>
+        <input type="text" name="survey_name" id="survey_name" required><br>
+
+        <label for="survey_description">Survey Description: </label>
+        <textarea name="survey_description" id="survey_description" required></textarea>
+
+        <h2> Let's create your survey </h2>
+        <label for="question_0">Question 1: </label>
+        <input type="text" name="questions[0][question_text]" id="question_0" required><br>
+
+        <label for="question_1">Question 2: </label>
+        <input type="text" name="questions[0][question_text]" id="question_0" required><br>
+
+        <label for="question_2">Question 3: </label>
+        <input type="text" name="questions[0][question_text]" id="question_0" required><br>
+
+        <label for="question_3">Question 4: </label>
+        <input type="text" name="questions[0][question_text]" id="question_0" required><br>
+
+        <label for="question_4">Question 5: </label>
+        <input type="text" name="questions[0][question_text]" id="question_0" required><br>
+
+        <label for="question_5">Question 6: </label>
+        <input type="text" name="questions[0][question_text]" id="question_0" required><br>
+
+        <label for="question_6">Question 5: </label>
+        <input type="text" name="questions[0][question_text]" id="question_0" required><br>
+
+        <button type="submit">Create Survey</button>
+
+     </form>
+
+
+    
+    <footer>
+        <p>.............. All rights reserved ....... </p>
+    </footer>
+
+</body>
+</html>
