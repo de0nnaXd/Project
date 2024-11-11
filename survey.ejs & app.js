@@ -1,4 +1,4 @@
-<!-- server.js -->
+<!-- servey.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +22,7 @@
 
 
 
-<!-- survey content in the 'app.ejs file'
+<!-- survey content in the 'app.js file'
 
 <!-- survey content here -->
      <form action="/create-survey" method="POST">
