@@ -1,29 +1,33 @@
-<!-- landing page -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="" alt="Logo">
-        </div>
-        <h1>.......Title Name..........</h1>
-    </header>
-    <!-- hero button/link to survey.ejs -->
-    <section class="hero">
-        <a href="/survey.ejs">
-            <button>Create Survey</button>
-        </a>
-    </section>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="/imgs/surveysurplex.png" alt="logo">
+            </div>
+            <h1>Welcome to Survey Surplex</h1>
+        </header>
 
-    <footer>
-        <p> ............. All rights reserved.</p>
-    </footer>
-</body>
+        <!-- loop over array 'surveys' therefore will iterate through loop and present each survey active -->
+        <section class="list">
+            <h2>Active Surveys</h2>
+            <ul>
+                <% surveys.forEach(function(survey) { %>
+                    <li>
+                        <%= survey.name %> <%= survey.description %>(<%= survey.numQ %> questions)
+                    </li>
+                <% }); %>
+            </ul>
+        </section>
+        <section class="hero">
+            <a href="/survey">
+                <button>Create Your Survey</button>
+            </a>
+        </section>
+    </body>
 </html>
-
-
