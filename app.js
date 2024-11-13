@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(surveyRoutes);
 
 // beginning of mongo database connection --> insert your mongodb in here
-mongoose.connect('mongodb+srv://xxxxx', {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://suzannebiju:0987654321@cluster0.z9ii2.mongodb.net/', {useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to Database');
     })
@@ -98,4 +98,62 @@ app.get('/', (req, res) => {
       res.redirect('/');
     });
   });
-... (60 lines left)
+  
+  app.get('/edit/:id', (req, res) => {
+    const id = req.params.id;
+    db.get('SELECT * FROM surveys WHERE id = ?', [id], (err, row) => {
+      if (err || !row) {
+        console.error(err);
+        res.sendStatus(404);
+        return;
+      }
+      res.send(`
+        <html>
+          <head><title>Edit Survey</title></head>
+          <body>
+            <h1>Edit Survey</h1>
+            <form action="/edit/${row.id}" method="POST">
+              <label for="title">Survey Title:</label><br>
+              <input type="text" id="title" name="title" value="${row.title}" required><br><br>
+              
+              <label for="description">Description:</label><br>
+              <textarea id="description" name="description" required>${row.description}</textarea><br><br>
+              
+              <button type="submit">Save Changes</button>
+            </form>
+            <a href="/">Back to List</a>
+          </body>
+        </html>
+      `);
+    });
+  });
+  
+  app.post('/edit/:id', (req, res) => {
+    const id = req.params.id;
+    const { title, description } = req.body;
+  
+    db.run('UPDATE surveys SET title = ?, description = ? WHERE id = ?', [title, description, id], function (err) {
+      if (err) {
+        console.error(err);
+        res.sendStatus(500);
+        return;
+      }
+      res.redirect('/');
+    });
+  });
+  app.get('/delete/:id', (req, res) => {
+    const id = req.params.id;
+  
+    db.run('DELETE FROM surveys WHERE id = ?', [id], function (err) {
+      if (err) {
+        console.error(err);
+        res.sendStatus(500);
+        return;
+      }
+      res.redirect('/');
+    });
+  });
+  
+  app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
