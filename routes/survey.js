@@ -5,6 +5,10 @@ let mongoose = require('mongoose');
 // tracker model --> database
 let Survey = require('../models/tracker');
 
+router.get('/', (req, res) => {
+    res.render('survey');
+});
+
 // C: add assignment --> POST
 router.post('/add', (req, res) => {
     // new assignment
