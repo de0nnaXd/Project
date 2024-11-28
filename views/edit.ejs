@@ -1,0 +1,30 @@
+<!-- tracker results here to display -->
+<%- include('partials/header.ejs') %>
+<%- include('partials/main_nav.ejs') %>
+
+<form method="post">
+    <main class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1><%= title %></h1><br>
+    <div class="form-group">
+        <label for="assignment">Name</label>
+        <input type="text" name="assignment" id="assignment" class="form-control" value="<%=Survey.name%>" required>
+    </div>
+    <div class="form-group">
+        <label for="due_date">Description</label>
+        <input type="text" name="due_date" id="due_date" class="form-control" value="<%=Survey.description%>" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Number of Questions</label>
+        <textarea name="description" id="description" class="form-control" required><%=Survey.numQ%></textarea>
+        <button type="submit" class="btn btn-primary">Change Assignment</button>
+    </div>
+</form>
+
+
+<!-- need to res render this button -->
+</div>
+</div>
+</main>
+<%- include('partials/scripts.ejs') %>

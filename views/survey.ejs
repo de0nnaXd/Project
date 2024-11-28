@@ -1,49 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/styles.css">
-    </head>
-    <body>
-        <h1> Create your very own Survey</h1>
-        <!-- survey creation form -->
-         <form action ="/create-survey" method="POST">
-            <label for="survey_name">Input your desired Survey Name: </label>
-            <input type="text" name="survey_name" id="survey_name" required><br>
-
-            <label for="survey_description">Survey Description: </label>
-            <textarea name="survey_description" id="survey_description" required></textarea>
-
-            <label for="question_amount">Input amount of questions: </label>
-            <input type="number" name="num_questions" min="1" required><br>
-            
-            <div id="container_Q"></div>
-            
-            <button type="submit">Create Survey!</button>
-         </form>
-
-         <!-- javascript to create function use via scripts -->
-          <script>
-            document.getElementById("num_questions").addEventListener("input", function() {
-                let numQ = this.value;
-                let container = document.getElementById("container_Q");
-
-                container.innerHTML = '';
-
-                for (let i = 0; i <numQ; i++) {
-                    let questionLabel = document.createElement("label");
-                    questionLabel.textContent = `Question ${i + 1}:`;
-                    
-                    let questionInput = document.createElement("input");
-                    questionInput.type = "text";
-                    questionInput.name = `question_${i + 1}`;
-                    questionInput.required = true;
-
-                    container.appendChild(questionLabel);
-                    container.appendChild(questionInput);
-                }
-            });
-          </script>
-    </body>
-</html>
+<h2>Add A Survey</h2>
+<form action="/survey/add" method="POST">
+    <div class="form-group">
+        <label for="assignment">Name</label>
+        <input type="text" name="assignment" id="assignment" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="due_date">Description</label>
+        <input type="text" name="due_date" id="due_date" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Number of Questions</label>
+        <textarea name="description" id="description" class="form-control" required></textarea>
+    </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>

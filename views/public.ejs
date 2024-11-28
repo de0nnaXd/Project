@@ -1,0 +1,52 @@
+<!-- tracker results here to display -->
+<%- include('partials/header.ejs') %>
+<%- include('partials/main_nav.ejs') %>
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <br>
+            <h1><%= title %></h1><br>
+
+            <!-- to add assignments -->
+            <form action="/survey" class="inline">
+                <button type="submit" class="survey">Add Survey</button>
+            </form>
+            <br>
+            <br>
+            
+
+            <!-- display assignments -->
+            <h2>Active Surveys</h2>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Number of Questions</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let count = 0; count < Surveylist.length; count++) { %>
+                        <tr>
+                            <td class="text-center"><%= Surveylist[count].name %></td>
+                            <td class="text-center"><%= Surveylist[count].description %></td>
+                            <td class="text-center"><%= Surveylist[count].numQ %></td>
+                            <td class="text-center">
+                                <a href="/public/edit/<%= Surveylist[count]._id %>">Edit</a>
+                                <form action="/public/delete/<%= Surveylist[count]._id %>" method="POST" onsubmit="return confirmDelete()">
+                                    <button type="submit" class="delete_button">Delete</button>
+                                </form>
+                            
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/scripts.ejs') %>
