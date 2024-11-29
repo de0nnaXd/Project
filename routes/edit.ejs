@@ -1,0 +1,29 @@
+<!-- tracker results here to display -->
+<%- include('partials/header.ejs') %>
+<%- include('partials/main_nav.ejs') %>
+
+<form method="post">
+    <main class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1><%= title %></h1><br>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="ticket" id="ticket" class="form-control" value="<%=Ticket.ticket%>" required>
+    </div>
+    <div class="form-group">
+        <label for="incident">Incident</label>
+        <input type="text" name="incident" id="incident" class="form-control" value="<%=Ticket.incident%>" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" class="form-control" required><%=Ticket.description%></textarea>
+        <button type="submit" class="btn btn-primary">Update Ticket</button>
+    </div>
+</form>
+
+
+</div>
+</div>
+</main>
+<%- include('partials/scripts.ejs') %>
