@@ -1,15 +1,15 @@
 let mongoose = require('mongoose');
 
 // inputs
-let surveyModel = mongoose.Schema ({
-    name: String,
-    description: String,
-    numQ: String
+let ticketModel = mongoose.Schema ({
+    ticket: String,
+    incident: String,
+    description: String
     },
     {
-        collections: "survey"
+        collections: "ticket"
     }
 );
 
-module.exports = mongoose.model('Survey', surveyModel);
+module.exports = mongoose.model('Ticket', ticketModel);
 
