@@ -5,7 +5,6 @@ let mongoose = require('mongoose');
 // tracker model --> database
 let Ticket = require('../models/ticketmodel');
 
-
 // R: display
 router.get('/', (req, res) => {
     // Retrieve all assignments from the database
