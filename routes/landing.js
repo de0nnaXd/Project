@@ -1,13 +1,18 @@
+// routes/landing.js
 var express = require('express');
 var router = express.Router();
 
-/* GET home/splash page. */
+/* GET home/landing page. */
 router.get('/', function(req, res, next) {
+  const message = req.query.message || '';
+  const loggedIn = req.query.loggedIn ? true : false; // Determine loggedIn status
   res.render('landing', { 
-    title: 'Ticket Terror',
-    section: 'Report an Incident today'});
+      title: 'Ticket Terror',
+      section: 'Report an Incident today',
+      message,
+      loggedIn // Pass loggedIn status to the view
+  });
 });
-
 module.exports = router;
 
 /* 

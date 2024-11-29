@@ -7,18 +7,17 @@ let Ticket = require('../models/ticketmodel');
 
 // R: display
 router.get('/', (req, res) => {
-    // Retrieve all assignments from the database
+    const loggedIn = req.query.loggedIn ? true : false; // Determine loggedIn status
     Ticket.find()
         .then((ticketlist) => {
             console.log(ticketlist);
-            res.render('public', { title: 'Ticket Terror', Ticketlist: ticketlist });
+            res.render('public', { title: 'Ticket Terror', Ticketlist: ticketlist, loggedIn });
         })
         .catch((err) => {
             console.log(err);
             res.status(500).send('Cannot display ticket');
         });
 });
-
 router.get('/edit/:id',async(req,res,next)=>{
     try{
         const id = req.params.id;
