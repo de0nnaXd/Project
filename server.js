@@ -5,14 +5,14 @@
  */
 
 var app = require('./config/app');
-var debug = require('debug')('webproject:server');
+var debug = require('debug')('project2:server');
 var http = require('http');
 
 /**
  * get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '4000');
 app.set('port', port);
 
 /**
