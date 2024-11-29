@@ -1,16 +1,21 @@
-<!-- index.ejs -->
 <%- include('partials/header.ejs') %>
 <%- include('partials/main_nav.ejs') %>
 
-<main>
-  <div class="jumbotron">
-    <h1 class="display-4">Welcome to <%= title %></h1>
-    <h2 class="lead"><%= section %></h2>
+<main class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to <%= title %></h1>
+        <h2 class="lead"><%= section %></h2>
+        
+        <p><%= message %></p>
 
-    <form action="/public" class="inline">
-      <button type="submit" class="ticket">Report</button>
-    </form>
-  </div>
+        <% if (!loggedIn) { %> 
+            <div class="alert alert-info" role="alert">
+                <p>You are not logged in. <a href="/login" class="alert-link">Login here</a> to access all features.</p>
+            </div>
+        <% } else { %>
+            <p>Thank you for being a valued user!</p>
+        <% } %>
+    </div>
 </main>
 
 <%- include('partials/scripts.ejs') %>

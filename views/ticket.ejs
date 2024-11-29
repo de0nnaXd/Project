@@ -1,16 +1,27 @@
+<%- include('partials/header.ejs') %>
+<%- include('partials/main_nav.ejs') %>
 <h2>Add A Survey</h2>
-<form action="/ticket/add" method="POST">
-    <div class="form-group">
-        <label for="name">Ticket Type</label>
-        <input type="ticket" name="ticket" id="ticket" class="form-control" required>
+
+<% if (!loggedIn) { %>
+    <div class="alert alert-danger" role="alert">
+        <p>You must be <a href="/login" class="alert-link">logged in</a> to submit a survey.</p>
     </div>
-    <div class="form-group">
-        <label for="incident">Incident</label>
-        <input type="incident" name="incident" id="incident" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="description">Description</label>
-        <textarea name="description" id="description" class="description" required></textarea>
-    </div>
+<% } else { %>
+    <form action="/ticket/add?loggedIn=true" method="POST">
+        <div class="form-group">
+            <label for="ticket">Ticket Type</label>
+            <input type="text" name="ticket" id="ticket" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="incident">Incident</label>
+            <input type="text" name="incident" id="incident" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="form-control" required></textarea>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    </form>
+<% } %>
+
+<%- include('partials/scripts.ejs') %>
