@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home/splash page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { 
+  res.render('landing', { 
     title: 'Ticket Terror',
     section: 'Report an Incident today'});
 });
