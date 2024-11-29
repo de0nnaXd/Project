@@ -8,6 +8,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
+
 // mongo
 let mongoose = require('mongoose');
 let DB = require('./db');
@@ -21,7 +22,7 @@ mongoDB.once('open', () => {
 });
 
 // to routers
-let indexRouter = require('../routes/index');
+let landingRouter = require('../routes/landing');
 let usersRouter = require('../routes/users');
 let publicRouter = require('../routes/public'); 
 let ticketRouter = require('../routes/ticket');
@@ -40,7 +41,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/node_modules', express.static(path.join(__dirname, '..', 'node_modules')));
 
 
-app.use('/', indexRouter);
+app.use('/', landingRouter);
 app.use('/users', usersRouter);
 app.use('/public', publicRouter); 
 app.use('/ticket', ticketRouter);
