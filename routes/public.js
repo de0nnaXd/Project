@@ -3,54 +3,31 @@ let router = express.Router();
 let mongoose = require('mongoose');
 
 // tracker model --> database
-let Survey = require('../models/tracker');
+let Ticket = require('../models/ticketmodel');
 
-/*
-// C: add assignment --> POST
-router.post('/add', (req, res) => {
-    // new assignment
-    let newSurvey = new Survey({
-        name: req.body.name,
-        description: req.body.description,
-        numQ: req.body.numQ
-    });
-
-    // save new assignment to the database
-    newSurvey.save()
-        .then(() => {
-            // After saving, redirect to /public to show the updated list
-            res.redirect('/public');
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).send('Cannot add assignment');
-        });
-});
-
-*/
 
 // R: display
 router.get('/', (req, res) => {
     // Retrieve all assignments from the database
-    Survey.find()
-        .then((surveylist) => {
-            console.log(surveylist);
-            res.render('public', { title: 'Survey Surplex', Surveylist: surveylist });
+    Ticket.find()
+        .then((ticketlist) => {
+            console.log(ticketlist);
+            res.render('public', { title: 'Ticket Terror', Ticketlist: ticketlist });
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send('Cannot display assignments');
+            res.status(500).send('Cannot display ticket');
         });
 });
 
 router.get('/edit/:id',async(req,res,next)=>{
     try{
         const id = req.params.id;
-        const surveytoEdit = await surveytoEdit.findById(id);
+        const tickettoEdit = await Ticket.findById(id);
         res.render('edit',
             {
                 title:'Edit Survey',
-                Survey:surveytoEdit
+                Ticket:tickettoEdit
             }
         )
     }
@@ -63,13 +40,13 @@ router.get('/edit/:id',async(req,res,next)=>{
 router.post('/edit/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
-        let updatedSurvey = Survey({
+        let updatedTicket = Ticket({
             "_id":id,
-            "name": req.body.name,
-            "description": req.body.description,
-            "numQ": req.body.numQ
+            "ticket": req.body.ticket,
+            "incident": req.body.incident,
+            "description": req.body.description
         });
-        Survey.findByIdAndUpdate(id,updatedSurvey).then(()=>{
+        Ticket.findByIdAndUpdate(id,updatedTicket).then(()=>{
             res.redirect('/public')
         })
     }
@@ -86,11 +63,11 @@ router.post('/delete/:id', (req, res) => {
     let id = req.params.id
     // Find and remove the assignment by its ID
     // button confirm delete here
-    Survey.deleteOne({_id:id}).then(()=>{
+    Ticket.deleteOne({_id:id}).then(()=>{
         res.redirect('/public');
     }).catch((err) => {
         console.log(err);
-        res.status(500).send('Cannot delete assignment');
+        res.status(500).send('Cannot delete ticket');
     });
 });
 

@@ -3,23 +3,23 @@ let router = express.Router();
 let mongoose = require('mongoose');
 
 // tracker model --> database
-let Survey = require('../models/tracker');
+let Ticket = require('../models/ticketmodel');
 
 router.get('/', (req, res) => {
-    res.render('survey');
+    res.render('ticket');
 });
 
 // C: add assignment --> POST
 router.post('/add', (req, res) => {
     // new assignment
-    let newSurvey = new Survey({
-        name: req.body.name,
-        description: req.body.description,
-        numQ: req.body.numQ
+    let newTicket = new Ticket({
+        ticket: req.body.ticket,
+        incident: req.body.incident,
+        description: req.body.description
     });
 
     // save new assignment to the database
-    newSurvey.save()
+    newTicket.save()
         .then(() => {
             // After saving, redirect to /public to show the updated list
             res.redirect('/public');

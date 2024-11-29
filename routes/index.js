@@ -4,8 +4,8 @@ var router = express.Router();
 /* GET home/splash page. */
 router.get('/', function(req, res, next) {
   res.render('index', { 
-    title: 'Survey Surplex',
-    section: 'Make your survey today!!!'});
+    title: 'Ticket Terror',
+    section: 'Report an Incident today'});
 });
 
 module.exports = router;
