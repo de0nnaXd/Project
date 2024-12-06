@@ -1,35 +1,38 @@
-// routes/login.js
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const passport = require('passport');
+const User = require('../models/user'); 
+const router = express.Router();
 
-// Render login page
-router.get('/', (req, res) => {
-    const message = req.query.message || '';
-    const loggedIn = req.query.loggedIn ? true : false;
-    res.render('login', { 
-        title: 'Login', message,
-        loggedIn  // Display login status based on query parameter
-    });
-});
-
-// Handle login submission
-router.post('/', (req, res) => {
-    const { username, password } = req.body;
-
-    // Hardcoded credentials (for demonstration purposes)
-    if (username === 'admin' && password === 'admin') {
-        // Redirect to ticket page with a loggedIn query parameter
-        res.redirect('/ticket?loggedIn=true');
-    } else {
-        // Redirect back to login with an error message
-        res.redirect('/login?message=Invalid credentials');
+// Display login page
+router.get('/', (req, res, next) => {
+    if (!req.user) { // If user not logged in...
+        res.render('authen/login', {
+            title: 'Login',
+            message: req.flash('loginMessage'),
+            displayName: req.user ? req.user.displayName : ''
+        });
+    } else { // If user is logged in...
+        return res.redirect('/landing');
     }
 });
 
-// Logout route
-router.get('/logout', (req, res) => {
-    
-    res.redirect('/login?message=Logged out');
+// Process login form submission
+router.post('/', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            req.flash('loginMessage', 'Authentication Error');
+            return res.redirect('/login');
+        }
+        req.login(user, (err) => {
+            if (err) {
+                return next(err);
+            }
+            return res.redirect('/landing');
+        });
+    })(req, res, next);
 });
 
 module.exports = router;
