@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+<%- include('../partials/main_nav') %>
+
+<main class="container">
+  <!-- Error Message -->
+  <% if (message && message.length > 0) { %>
+    <div class="alert alert-danger">
+      <%= message %>
+    </div>
+  <% } %>
+
+  <!-- Login Form -->
+  <div class="row">
+    <div class="offset-md-3 col-md-6">
+      <h1>Please Login</h1>
+      <form method="post" autocomplete="off">
+        <fieldset class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required autofocus>
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
+        </fieldset>
+        <p>or <a href="/register">Register Here</a></p>
+        <fieldset class="form-group text-right">
+          <input type="submit" class="btn btn-success" value="Login">
+          <a href="/" class="btn btn-warning">Cancel</a>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/scripts') %>
+<%- include('../partials/footer.ejs') %>
