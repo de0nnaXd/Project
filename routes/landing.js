@@ -1,6 +1,8 @@
 // routes/landing.js
 var express = require('express');
 var router = express.Router();
+let indexController = require('../controller/index');
+
 
 /* GET home/landing page. */
 router.get('/', function(req, res, next) {
@@ -13,6 +15,21 @@ router.get('/', function(req, res, next) {
       loggedIn // Pass loggedIn status to the view
   });
 });
+
+
+
+//Get router for login page
+router.get('/login', indexController.displayLoginPage);
+//Post router for login page
+router.post('/login', indexController.processLoginPage);
+//Get router for registration page
+router.get('/register', indexController.displayRegisterPage);
+//Post router for register page
+router.post('/register', indexController.processRegisterPage);
+//Get router for logout page
+router.get('/logout', indexController.performLogout);
+
+
 module.exports = router;
 
 /* 
